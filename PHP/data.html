@@ -1,0 +1,87 @@
+/ 네비게이션 페이지 설정
+
+            var pageConfig = [
+
+                {id: 'page1',  panel: 'panel1',  url: './1.html?id=0'},
+
+                {id: 'page2',  panel: 'panel2',  url: './2.html?id=1'},
+
+                {id: 'page3',  panel: 'panel3',  url: './3.html?id=2'},
+
+                {id: 'page4',  panel: 'panel4',  url: './4.html?id=3'},
+
+                {id: 'page5',  panel: 'panel5',  url: './5.html?id=4'},
+
+                {id: 'page6',  panel: 'panel6',  url: './6.html?id=5'},
+
+                {id: 'page7',  panel: 'panel7',  url: './poll.html'},
+
+                {id: 'page8',  panel: 'panel8',  url: './push.html'},
+
+                {id: 'page9',  panel: 'panel9',  url: './site.html'},
+
+                {id: 'page10', panel: 'panel10', url: 'Settings', cd: 'T7'}, 
+
+                {id: 'page11', panel: 'panel11', url: './MobileLogout.php', cd: 'T8'}, 
+
+                {id: 'page12', panel: 'panel12', url: './comp.html', cd: 'P1'}, 
+
+                {id: 'page13', panel: 'panel13', url: './shop.html', cd: 'P2'}, 
+
+                {id: 'page14', panel: 'panel14', url: './susu.html', cd: 'P3'}, 
+
+                {id: 'page15', panel: 'panel15', url: './book.html', cd: 'P4'} 
+
+            ];          
+
+            
+
+            // 페이지 네비게이션 이벤트 바인딩
+
+            pageConfig.forEach(function(config) {
+
+                $("#" + config.id + ", #" + config.panel).off('click').on('click', function(){
+
+                    if (phone_ty == 'WEB'){
+
+                        if (['panel12', 'panel13', 'panel14', 'panel15'].includes(config.panel)) {
+
+                            window.open(config.url);
+
+                            $("#left-panel").addClass('ui-panel-closed').removeClass('ui-panel-open');  
+
+                            $("a[href='#left-panel']").trigger("click");
+
+                        }else {
+
+                            location.href = config.url;
+
+                        }
+
+                        
+
+                    } else {
+
+                        if (['panel10', 'panel11'].includes(config.panel)) {
+
+                            sendUrlToApp(config.cd);
+
+                        } else if (['panel12', 'panel13', 'panel14', 'panel15'].includes(config.panel)) {
+
+                            sendUrlToApp(config.cd);
+
+                            $("#left-panel").addClass('ui-panel-closed').removeClass('ui-panel-open');  
+
+                            $("a[href='#left-panel']").trigger("click");    
+
+                        } else {
+
+                            location.href = config.url;
+
+                        }
+
+                    }
+
+                });
+
+            });
